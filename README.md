@@ -50,7 +50,7 @@ To create a new instance of the `APIServer` class, you'll need to provide it wit
 * `create`, `read`, `update`, and `delete` functions for handling CRUD requests (optional) `Future<Response> handler(Request request)`
 * Port number for the server (optional) `int port`
 * Version number for your API (optional) `int version`
-* Name your API  `String name`
+* Name your API  `String apiName`
 * A list of custom routes (optional) `List<CustomRoute> endpoints`
 * Whether to enable logging or not (optional) `bool logger`
 * Whether or not using CRUD. `bool noCRUD`
