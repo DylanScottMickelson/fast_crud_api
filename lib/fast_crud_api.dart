@@ -94,7 +94,7 @@ class APIServer {
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
-      'packages/free_os/packages/fast_crud_api/assets/web',
+      'assets/web',
       defaultDocument: 'index.html',
       serveFilesOutsidePath: true,
     );
