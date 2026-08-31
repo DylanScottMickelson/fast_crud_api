@@ -93,11 +93,16 @@ class APIServer {
     final Router app = Router();
 
     ///FAST CRUD DOCS UI Handler
-    final flutterWebHandler = createStaticHandler(
-      'assets/web',
-      defaultDocument: 'index.html',
-      serveFilesOutsidePath: true,
-    );
+    // final flutterWebHandler = createStaticHandler(
+    //   'assets/web',
+    //   defaultDocument: 'index.html',
+    //   serveFilesOutsidePath: true,
+    // );
+    final staticHandler = serveStatic(
+  'assets/web',
+  rootPath: '/',
+  defaultDocument: 'index.html',
+);
 
     final InternetAddress address = InternetAddress.anyIPv4;
 
