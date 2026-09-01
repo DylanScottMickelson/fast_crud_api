@@ -89,44 +89,40 @@ class APIServer {
     };
   }
 
-  ///Get Package Path : Helper Function
-  String getPackageLibPath(String packageName) {
-  // Use the known project root instead of walking from Directory.current
-  // Replace with your actual project root path, or derive it:
-  final projectRoot = Directory.current.path; // verify this prints what you expect
+  ///Get Web App Path : Helper Function
+  String getFlutterWebPath(String packageName) {
+    final projectRoot = Directory.current.path; 
   
-  final packageConfig = File(p.join(projectRoot, '.dart_tool', 'package_config.json'));
-  if (!packageConfig.existsSync()) {
-    throw StateError('No package_config.json at $projectRoot — check Directory.current');
-  }
-
-  final json = jsonDecode(packageConfig.readAsStringSync()) as Map<String, dynamic>;
-  final packages = json['packages'] as List<dynamic>;
-
-  for (final pkg in packages) {
-    final map = pkg as Map<String, dynamic>;
-    if (map['name'] == packageName) {
-      final rootUri = Uri.parse(map['rootUri'] as String);
-      final packageRoot = p.normalize(
-        p.join(p.dirname(packageConfig.path), rootUri.toFilePath()),
-      );
-      final libPath = p.join(packageRoot, 'lib');
-      print('Resolved $packageName lib to: $libPath');
-      return libPath;
+    final packageConfig = File(p.join(projectRoot, '.dart_tool', 'package_config.json'));
+    if (!packageConfig.existsSync()) {
+      throw StateError('No package_config.json at $projectRoot — check Directory.current');
     }
+
+    final json = jsonDecode(packageConfig.readAsStringSync()) as Map<String, dynamic>;
+    final packages = json['packages'] as List<dynamic>;
+
+    for (final pkg in packages) {
+      final map = pkg as Map<String, dynamic>;
+      if (map['name'] == packageName) {
+        final rootUri = Uri.parse(map['rootUri'] as String);
+        final packageRoot = p.normalize(
+          p.join(p.dirname(packageConfig.path), rootUri.toFilePath()),
+        );
+        final libPath = p.join(packageRoot, 'lib');
+        final webDir = p.join(libPath, 'assets', 'web');
+        return webDir;
+      }
+    }
+    throw StateError('Package "$packageName" not found');
   }
-  throw StateError('Package "$packageName" not found');
-}
 
   ///Start Sever : Void Function
   Future<void> start() async {
     final Router app = Router();
 
-    final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
-
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
-      webDir,
+      getFlutterWebPath("fast_crud_api"),
       defaultDocument: 'index.html',
       serveFilesOutsidePath: true
     );
