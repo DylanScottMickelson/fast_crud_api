@@ -147,7 +147,7 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
       return Response.ok("Welcome to Fast CRUD API!");
     }); 
 
-    // app.get("/docs", flutterWebHandler);
+    app.get("/docs", flutterWebHandler);
 
     app.get('/api/version', (Request request) async {
       return Response.ok(jsonEncode({"version": version ?? 1}));
@@ -232,7 +232,6 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
     final handler = const Pipeline()
         .addMiddleware(customLogger())
         .addMiddleware(createCorsMiddleware())
-        .addHandler(flutterWebHandler.call)
         .addHandler(app.call);
 
     ///Create & Start HTTP Server
