@@ -89,11 +89,8 @@ class APIServer {
     };
   }
 
-  ///Start Sever : Void Function
-  Future<void> start() async {
-  final Router app = Router();
-
-String getPackageLibPath(String packageName) {
+  ///Get Package Path : Helper Function
+  String getPackageLibPath(String packageName) {
   // Use the known project root instead of walking from Directory.current
   // Replace with your actual project root path, or derive it:
   final projectRoot = Directory.current.path; // verify this prints what you expect
@@ -120,8 +117,12 @@ String getPackageLibPath(String packageName) {
   }
   throw StateError('Package "$packageName" not found');
 }
-// Usage:
-final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
+
+  ///Start Sever : Void Function
+  Future<void> start() async {
+    final Router app = Router();
+
+    final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
@@ -239,7 +240,7 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
 
     ///Log Server Start Success
     Logger.log(
-      '✅ $apiName Server started on port ${server.port}\n🌐 Access Production API docs at http://${address.address}:${server.port}/\n🧑‍💻 Dev API docs at http://localhost:${server.port}/',
+      '✅ ${apiName == null ? "Fast CRUD API" : apiName} Server started on port ${server.port}\n🌐 Access Production API docs at http://${address.address}:${server.port}/api/docs/\n🧑‍💻 Dev API docs at http://localhost:${server.port}/api/docs/',
       code: "200",
     );
   }
