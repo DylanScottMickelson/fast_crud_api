@@ -127,6 +127,7 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
     final flutterWebHandler = createStaticHandler(
       Directory(webDir).resolveSymbolicLinksSync(),
       defaultDocument: 'index.html',
+      serveFilesOutsidePath: true,
     );
 
     final InternetAddress address = InternetAddress.anyIPv4;
@@ -141,6 +142,10 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
         {"endpoint": "/v${version ?? 1}/delete", "method": "DELETE"},
       ], growable: true);
     }
+
+    app.get("/", (Request request) async {
+      return Response.ok("Welcome to Fast CRUD API!");
+    }); 
 
     app.get("/docs", flutterWebHandler);
 
@@ -227,6 +232,7 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
     final handler = const Pipeline()
         .addMiddleware(customLogger())
         .addMiddleware(createCorsMiddleware())
+        .addHandler(flutterWebHandler)
         .addHandler(app.call);
 
     ///Create & Start HTTP Server
