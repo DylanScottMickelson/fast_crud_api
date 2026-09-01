@@ -94,10 +94,17 @@ class APIServer {
   final Router app = Router();
 
     ///FAST CRUD DOCS UI Handler
+<<<<<<< HEAD
     final flutterWebHandler = createStaticHandler(
       'lib/assets/web',
       defaultDocument: 'index.html',
     );
+=======
+    // final flutterWebHandler = createStaticHandler(
+    //   'assets/web',
+    //   defaultDocument: 'index.html',
+    // );
+>>>>>>> 95b9730c783e9a69d108bdfc8a46cf5f05dffadd
 
     final InternetAddress address = InternetAddress.anyIPv4;
 
@@ -112,7 +119,7 @@ class APIServer {
       ], growable: true);
     }
 
-    app.get("/", flutterWebHandler);
+    // app.get("/", flutterWebHandler);
 
     app.get('/api/version', (Request request) async {
       return Response.ok(jsonEncode({"version": version ?? 1}));
