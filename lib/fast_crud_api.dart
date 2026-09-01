@@ -142,7 +142,7 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
       ], growable: true);
     }
 
-    app.get("/", flutterWebHandler);
+    app.get("/docs", flutterWebHandler);
 
     app.get('/api/version', (Request request) async {
       return Response.ok(jsonEncode({"version": version ?? 1}));
