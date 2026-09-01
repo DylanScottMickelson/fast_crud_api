@@ -95,7 +95,7 @@ class APIServer {
   final Router app = Router();
 
    Future<String> getPackageLibPath() async {
-  final uri = await Isolate.resolvePackageUri(
+  final uri = await Isolate.resolvePackageUriSync(
     Uri.parse('package:fast_crud_api/fast_crud_api.dart'),  
   );
   // uri is like: file:///path/to/.pub-cache/.../my_package/lib/some_file.dart
