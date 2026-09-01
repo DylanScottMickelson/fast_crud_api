@@ -14,7 +14,8 @@ dependencies:
 
   shelf: any
   shelf_router: any
-  shelf_static: any  
+  shelf_static: any
+  path: any  
 
 dev_dependencies:
   flutter_test:

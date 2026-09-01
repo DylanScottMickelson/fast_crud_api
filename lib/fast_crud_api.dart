@@ -7,6 +7,7 @@ import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf_static/shelf_static.dart';
+import 'package:path/path.dart' as p;
 
 /// FAST CRUD API SERVER
 ///
@@ -90,13 +91,12 @@ class APIServer {
 
   ///Start Sever : Void Function
   Future<void> start() async {
-    final Router app = Router();
+  final Router app = Router();
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
-      'packages/free_os/packages/fast_crud_api/assets/web',
+      'lib/assets/web',
       defaultDocument: 'index.html',
-      serveFilesOutsidePath: true,
     );
 
     final InternetAddress address = InternetAddress.anyIPv4;
