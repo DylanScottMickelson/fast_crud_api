@@ -21,6 +21,7 @@ import 'package:path/path.dart' as p;
 /// 7/24/2026 DSM
 /// 8/03/2026 DSM
 /// 8/10/2026 DSM
+/// 8/31/2026 DSM
 
 class APIServer {
   final String? apiName;
@@ -232,7 +233,7 @@ class APIServer {
         .addHandler(app.call);
 
     ///Create & Start HTTP Server
-    final HttpServer server = await serve(handler, address, 6969);
+    final HttpServer server = await serve(handler, address, port ?? 6969);
 
     ///Log Server Start Success
     Logger.log(
