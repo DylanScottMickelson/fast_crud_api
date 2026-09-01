@@ -125,7 +125,7 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
-      Directory(webDir).resolveSymbolicLinksSync(),
+      webDir,
       defaultDocument: 'index.html',
       serveFilesOutsidePath: true,
     );
