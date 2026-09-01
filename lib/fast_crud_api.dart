@@ -93,8 +93,16 @@ class APIServer {
   Future<void> start() async {
   final Router app = Router();
 
-   final packageRoot = File(Platform.script.toFilePath()).parent.path;
-   final webDir = '$packageRoot/lib/assets/web';
+   String getPackageLibPath() {
+  final uri = Isolate.resolvePackageUri(
+    Uri.parse('package:fast_crud_api/fast_crud_api.dart'),  
+  );
+  // uri is like: file:///path/to/.pub-cache/.../my_package/lib/some_file.dart
+  return p.dirname(uri!.toFilePath()); // .../my_package/lib/
+}
+
+// Then:
+final webDir = p.join(getPackageLibPath(), 'assets', 'web');
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
