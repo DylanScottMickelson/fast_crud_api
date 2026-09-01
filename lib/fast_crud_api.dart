@@ -93,20 +93,46 @@ class APIServer {
   Future<void> start() async {
   final Router app = Router();
 
-  String getPackageRoot() {
-  final scriptPath = File(Platform.script.toFilePath()).absolute.path;
-  // Walk up until we find pubspec.yaml (the package root)
-  var dir = File(scriptPath).parent;
-  while (dir.path != p.dirname(dir.path)) {
-    if (File(p.join(dir.path, 'pubspec.yaml')).existsSync()) {
-      return dir.path;
+ String getPackageLibPath(String packageName) {
+  // Find .dart_tool/package_config.json by walking up from cwd
+  var dir = Directory.current;
+  File? packageConfig;
+  while (true) {
+    final candidate = File(p.join(dir.path, '.dart_tool', 'package_config.json'));
+    if (candidate.existsSync()) {
+      packageConfig = candidate;
+      break;
     }
-    dir = dir.parent;
+    final parent = dir.parent;
+    if (parent.path == dir.path) break; // reached filesystem root
+    dir = parent;
   }
-  throw StateError('Could not find package root from $scriptPath');
+
+  if (packageConfig == null) {
+    throw StateError('Could not find .dart_tool/package_config.json');
+  }
+
+  final json = jsonDecode(packageConfig.readAsStringSync()) as Map<String, dynamic>;
+  final packages = json['packages'] as List<dynamic>;
+
+  for (final pkg in packages) {
+    final map = pkg as Map<String, dynamic>;
+    if (map['name'] == packageName) {
+      // rootUri is relative to the directory containing package_config.json
+      // e.g. "../../.pub-cache/hosted/pub.dev/fast_crud_api-1.0.0"
+      final rootUri = Uri.parse(map['rootUri'] as String);
+      final packageRoot = p.normalize(
+        p.join(p.dirname(packageConfig.path), rootUri.toFilePath()),
+      );
+      return p.join(packageRoot, 'lib');
+    }
+  }
+
+  throw StateError('Package "$packageName" not found in package_config.json');
 }
 
-final webDir = p.join(getPackageRoot(), 'lib', 'assets', 'web');
+// Usage:
+final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
