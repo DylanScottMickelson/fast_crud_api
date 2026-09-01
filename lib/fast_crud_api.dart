@@ -122,22 +122,11 @@ String getPackageLibPath(String packageName) {
 }
 // Usage:
 final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
-    print('webDir: $webDir');
-print('dir exists: ${Directory(webDir).existsSync()}');
-print('index.html exists: ${File(p.join(webDir, 'index.html')).existsSync()}');
-print('flutter_bootstrap.js exists: ${File(p.join(webDir, 'flutter_bootstrap.js')).existsSync()}');
-print('manifest.json exists: ${File(p.join(webDir, 'manifest.json')).existsSync()}');
-    final resolved = Directory(webDir).resolveSymbolicLinksSync();
-print('Original:  $webDir');
-print('Resolved:  $resolved');
-print('flutter_bootstrap.js at resolved: ${File(p.join(resolved, 'flutter_bootstrap.js')).existsSync()}');
-
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
       Directory(webDir).resolveSymbolicLinksSync(),
       defaultDocument: 'index.html',
-      serveFilesOutsidePath: true
     );
 
     final InternetAddress address = InternetAddress.anyIPv4;
