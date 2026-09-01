@@ -94,15 +94,20 @@ class APIServer {
   Future<void> start() async {
   final Router app = Router();
 
-   Future<String> getPackageLibPath() async {
-  final uri = await Isolate.resolvePackageUri(
-    Uri.parse('package:fast_crud_api/fast_crud_api.dart'),
-  );
-  return p.dirname(uri!.toFilePath());
+  String getPackageRoot() {
+  final scriptPath = File(Platform.script.toFilePath()).absolute.path;
+  // Walk up until we find pubspec.yaml (the package root)
+  var dir = File(scriptPath).parent;
+  while (dir.path != p.dirname(dir.path)) {
+    if (File(p.join(dir.path, 'pubspec.yaml')).existsSync()) {
+      return dir.path;
+    }
+    dir = dir.parent;
+  }
+  throw StateError('Could not find package root from $scriptPath');
 }
 
-// Then:
-final webDir = p.join(await getPackageLibPath(), 'assets', 'web');
+final webDir = p.join(getPackageRoot(), 'lib', 'assets', 'web');
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
