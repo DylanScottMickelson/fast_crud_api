@@ -112,7 +112,7 @@ class APIServer {
       ], growable: true);
     }
 
-    // app.get("/", flutterWebHandler);
+    app.get("/", flutterWebHandler);
 
     app.get('/api/version', (Request request) async {
       return Response.ok(jsonEncode({"version": version ?? 1}));
