@@ -94,7 +94,7 @@ class APIServer {
   Future<void> start() async {
   final Router app = Router();
 
-   String getPackageLibPath() {
+   Future<String> getPackageLibPath() async {
   final uri = await Isolate.resolvePackageUri(
     Uri.parse('package:fast_crud_api/fast_crud_api.dart'),  
   );
@@ -103,7 +103,7 @@ class APIServer {
 }
 
 // Then:
-final webDir = p.join(getPackageLibPath(), 'assets', 'web');
+final webDir = p.join(await getPackageLibPath(), 'assets', 'web');
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
