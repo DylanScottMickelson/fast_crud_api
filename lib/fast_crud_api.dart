@@ -93,9 +93,12 @@ class APIServer {
   Future<void> start() async {
   final Router app = Router();
 
+   final packageRoot = File(Platform.script.toFilePath()).parent.parent.path;
+   final webDir = '$packageRoot/lib/assets/web';
+
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
-      'lib/assets/web',
+      webDir,
       defaultDocument: 'index.html',
     );
 
