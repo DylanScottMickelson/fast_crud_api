@@ -93,23 +93,14 @@ class APIServer {
   Future<void> start() async {
   final Router app = Router();
 
- String getPackageLibPath(String packageName) {
-  // Find .dart_tool/package_config.json by walking up from cwd
-  var dir = Directory.current;
-  File? packageConfig;
-  while (true) {
-    final candidate = File(p.join(dir.path, '.dart_tool', 'package_config.json'));
-    if (candidate.existsSync()) {
-      packageConfig = candidate;
-      break;
-    }
-    final parent = dir.parent;
-    if (parent.path == dir.path) break; // reached filesystem root
-    dir = parent;
-  }
-
-  if (packageConfig == null) {
-    throw StateError('Could not find .dart_tool/package_config.json');
+String getPackageLibPath(String packageName) {
+  // Use the known project root instead of walking from Directory.current
+  // Replace with your actual project root path, or derive it:
+  final projectRoot = Directory.current.path; // verify this prints what you expect
+  
+  final packageConfig = File(p.join(projectRoot, '.dart_tool', 'package_config.json'));
+  if (!packageConfig.existsSync()) {
+    throw StateError('No package_config.json at $projectRoot — check Directory.current');
   }
 
   final json = jsonDecode(packageConfig.readAsStringSync()) as Map<String, dynamic>;
@@ -118,19 +109,17 @@ class APIServer {
   for (final pkg in packages) {
     final map = pkg as Map<String, dynamic>;
     if (map['name'] == packageName) {
-      // rootUri is relative to the directory containing package_config.json
-      // e.g. "../../.pub-cache/hosted/pub.dev/fast_crud_api-1.0.0"
       final rootUri = Uri.parse(map['rootUri'] as String);
       final packageRoot = p.normalize(
         p.join(p.dirname(packageConfig.path), rootUri.toFilePath()),
       );
-      return p.join(packageRoot, 'lib');
+      final libPath = p.join(packageRoot, 'lib');
+      print('Resolved $packageName lib to: $libPath');
+      return libPath;
     }
   }
-
-  throw StateError('Package "$packageName" not found in package_config.json');
+  throw StateError('Package "$packageName" not found');
 }
-
 // Usage:
 final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
 
