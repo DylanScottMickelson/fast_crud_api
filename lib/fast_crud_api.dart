@@ -135,7 +135,7 @@ print('flutter_bootstrap.js at resolved: ${File(p.join(resolved, 'flutter_bootst
 
     ///FAST CRUD DOCS UI Handler
     final flutterWebHandler = createStaticHandler(
-      webDir,
+      Directory(webDir).resolveSymbolicLinksSync(),
       defaultDocument: 'index.html',
       serveFilesOutsidePath: true
     );
