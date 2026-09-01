@@ -127,7 +127,7 @@ final webDir = p.join(getPackageLibPath('fast_crud_api'), 'assets', 'web');
     final flutterWebHandler = createStaticHandler(
       webDir,
       defaultDocument: 'index.html',
-      directoryListing: false,
+      serveFilesOutsidePath: true
     );
 
     final InternetAddress address = InternetAddress.anyIPv4;
