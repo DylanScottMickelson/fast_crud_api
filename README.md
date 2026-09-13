@@ -2,15 +2,15 @@
   <img src="fast_crud_api-banner-minimal.svg" alt="Fast CRUD API banner" />
 </p>
 
-`fast_crud_api` is a lightweight, customizable, and easy-to-use Dart package to create simple CRUD (Create, Read, Update, Delete) APIs. It uses the `shelf` package for building web servers and supports both default CRUD endpoints and custom routes.
+A lightweight, customizable, easy-to-use package to create simple CRUD (Create, Read, Update, Delete) APIs. It uses the `shelf` package for building web servers and supports both default CRUD endpoints and custom routes.
 
 ## 📃 Features
 
-* Simple 4 endpoint CRUD API server
+* Default simple 4-endpoint CRUD API server
 * Customizable with custom endpoints or a combination of both
-* Supports HTTP methods: GET, POST, PUT, DELETE, and OPTIONS
-* CORS (Cross-Origin Resource Sharing) middleware enabled by default
-* Logging using the `logger` package for debugging purposes
+* Supports HTTP methods: GET, POST, PUT, and DELETE
+* CORS (Cross-Origin Resource Sharing) middleware enabled by default (Must be changed for Production!)
+* Logging for debugging purposes
 
 ## 📖 Table of Contents
 
@@ -27,18 +27,21 @@
 
 ## 🟢 Getting Started <a name="getting-started"></a>
 
-To get started with `fast_crud_api`, make sure you have Dart and Shelf installed on your system. You can find the installation instructions for both in their respective official documentation:
+To get started with `fast_crud_api`, make sure you have either the Flutter SDK or the Dart SDK installed on your system. You can find the installation instructions for both in their respective official documentation:
 
-* [Dart](https://dart.dev/get-started)
-* [Shelf](https://shelf.readthedocs.io/en/latest/)
+* [Flutter](https://docs.flutter.dev/install)
+* [Dart](https://dart.dev/get-dart)
 
 ## 💽 Installation <a name="installation"></a>
 
-Add the `fast_crud_api` dependency to your `pubspec.yaml` file:
+Add `fast_crud_api` and `shelf` dependencies to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  fast_crud_api: ^1.0.0
+  shelf: any
+  fast_crud_api:
+    git:
+      url: https://github.com/DylanScottMickelson/fast_crud_api.git
 ```
 
 Now, run `flutter pub get` or `dart pub get` in your terminal/command prompt to install the package and its dependencies.
@@ -138,26 +141,34 @@ void main() async {
 }
 ```
 
-### 🧑‍💻 Access the CRUD endpoints by submmiting a http request to:
+### 👨‍💻 Access Docs UI:
 
+Production:
+Go to http://ip_address:chosen_port/api/docs/
+
+Test:
+Go to http://127.0.0.1:6969/api/docs/
+
+### 🧑‍💻 Access the CRUD endpoints by sending an HTTP request to:
+
+Production:
 - http://ip_address:chosen_port/v{version_number}/create 
 - http://ip_address:chosen_port/v{version_number}/read
 - http://ip_address:chosen_port/v{version_number}/update 
 - http://ip_address:chosen_port/v{version_number}/delete 
 
-Default Non-production:
-
+Test:
 - http://127.0.0.1:6969/v1/create
 - http://127.0.0.1:6969/v1/read
 - http://127.0.0.1:6969/v1/update
 - http://127.0.0.1:6969/v1/delete
 
-### 💻 Access Custom endpoints by submmiting a http request to: 
+### 💻 Access Custom endpoints by sending an HTTP request to: 
 
+Production: 
 - http://ip_address:chosen_port/v{version_number}/your/custom/route
 
-Default Non-production:
-
+Test:
 - http://127.0.0.1:6969/v1/your/custom/route
 
 ## 📑 Examples <a name="examples"></a>
