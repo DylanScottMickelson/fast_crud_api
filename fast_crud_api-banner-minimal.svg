@@ -1,0 +1,123 @@
+<svg width="1600" height="500" viewBox="0 0 1600 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="40" x2="1500" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FAFD"/>
+      <stop offset="0.52" stop-color="#EEF5FB"/>
+      <stop offset="1" stop-color="#E6F0F8"/>
+    </linearGradient>
+    <linearGradient id="title" x1="430" y1="110" x2="1110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F2B46"/>
+      <stop offset="1" stop-color="#176B9A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="430" y1="314" x2="1140" y2="314" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2CBF9A"/>
+      <stop offset="0.5" stop-color="#48A6E8"/>
+      <stop offset="1" stop-color="#F08A4B"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#28506F" flood-opacity="0.12"/>
+    </filter>
+    <clipPath id="clip">
+      <rect width="1600" height="500" rx="32"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#clip)">
+    <rect width="1600" height="500" fill="url(#bg)"/>
+
+    <!-- subtle decorative shapes -->
+    <circle cx="1320" cy="104" r="112" fill="#76BEE8" fill-opacity="0.10"/>
+    <circle cx="1198" cy="378" r="146" fill="#2CBF9A" fill-opacity="0.08"/>
+    <path d="M1180 78C1288 114 1360 188 1414 286" stroke="#8AB8D6" stroke-opacity="0.34" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 12"/>
+    <path d="M1110 346C1218 306 1344 308 1478 360" stroke="#48A6E8" stroke-opacity="0.20" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- left icon panel -->
+    <g transform="translate(94 108)" filter="url(#shadow)">
+      <rect x="0" y="0" width="274" height="274" rx="30" fill="#FFFFFF" stroke="#D8E6F1"/>
+      <rect x="20" y="20" width="234" height="20" rx="10" fill="#EAF2F8"/>
+      <circle cx="42" cy="30" r="5" fill="#2CBF9A"/>
+      <circle cx="60" cy="30" r="5" fill="#48A6E8"/>
+      <circle cx="78" cy="30" r="5" fill="#F08A4B"/>
+
+      <g transform="translate(28 68)" font-family="Segoe UI, Arial, sans-serif" font-weight="700">
+        <rect width="98" height="72" rx="18" fill="#F5FBF9" stroke="#CFE9E0"/>
+        <text x="49" y="45" text-anchor="middle" fill="#218A71" font-size="26">GET</text>
+      </g>
+      <g transform="translate(148 68)" font-family="Segoe UI, Arial, sans-serif" font-weight="700">
+        <rect width="98" height="72" rx="18" fill="#F2F8FD" stroke="#D1E5F3"/>
+        <text x="49" y="45" text-anchor="middle" fill="#176B9A" font-size="24">POST</text>
+      </g>
+      <g transform="translate(28 156)" font-family="Segoe UI, Arial, sans-serif" font-weight="700">
+        <rect width="98" height="72" rx="18" fill="#FFF7F2" stroke="#F1D5C0"/>
+        <text x="49" y="45" text-anchor="middle" fill="#C5662C" font-size="24">PUT</text>
+      </g>
+      <g transform="translate(148 156)" font-family="Segoe UI, Arial, sans-serif" font-weight="700">
+        <rect width="98" height="72" rx="18" fill="#F4F8FB" stroke="#D7E3ED"/>
+        <text x="49" y="45" text-anchor="middle" fill="#2A4B66" font-size="22">DELETE</text>
+      </g>
+
+    </g>
+
+    <!-- text block -->
+    <g transform="translate(430 112)">
+      <text x="0" y="76" fill="url(#title)" font-family="Segoe UI, Arial, sans-serif" font-size="74" font-weight="800" letter-spacing="-1.5">Fast CRUD API</text>
+      <text x="0" y="126" fill="#5F7284" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="500">
+        Lightweight CRUD endpoints for Shelf, with
+      </text>
+      <text x="0" y="168" fill="#5F7284" font-family="Segoe UI, Arial, sans-serif" font-size="29" font-weight="500">
+        custom routes, CORS, and logger support.
+      </text>
+    </g>
+
+    <!-- features -->
+    <g transform="translate(430 310)" font-family="Segoe UI, Arial, sans-serif">
+      <g>
+        <rect width="165" height="50" rx="25" fill="#FFFFFF" stroke="#CFE0EC"/>
+        <text x="82.5" y="32" text-anchor="middle" fill="#1E648D" font-size="20" font-weight="700">CORS enabled</text>
+      </g>
+      <g transform="translate(180 0)">
+        <rect width="168" height="50" rx="25" fill="#FFFFFF" stroke="#CFE0EC"/>
+        <text x="84" y="32" text-anchor="middle" fill="#1E648D" font-size="20" font-weight="700">Logger support</text>
+      </g>
+      <g transform="translate(366 0)">
+        <rect width="164" height="50" rx="25" fill="#FFFFFF" stroke="#CFE0EC"/>
+        <text x="82" y="32" text-anchor="middle" fill="#1E648D" font-size="20" font-weight="700">Custom routes</text>
+      </g>
+    </g>
+
+    <!-- right-side code card -->
+    <g transform="translate(1020 92)" filter="url(#shadow)">
+      <rect width="500" height="316" rx="28" fill="#FFFFFF" stroke="#D9E5EE"/>
+      <rect x="20" y="20" width="460" height="28" rx="14" fill="#F1F6FA"/>
+      <circle cx="42" cy="34" r="6" fill="#FF6A6A"/>
+      <circle cx="62" cy="34" r="6" fill="#FFD166"/>
+      <circle cx="82" cy="34" r="6" fill="#2CBF9A"/>
+      <text x="116" y="40" fill="#6A8498" font-family="SFMono-Regular, Consolas, monospace" font-size="14">api_server.dart</text>
+
+      <g font-family="SFMono-Regular, Consolas, monospace" font-size="18">
+        <text x="34" y="92" fill="#2CBF9A">final</text>
+        <text x="88" y="92" fill="#22445C">apiServer = APIServer(</text>
+
+        <text x="34" y="124" fill="#48A6E8">create</text>
+        <text x="108" y="124" fill="#22445C">: handler,</text>
+
+        <text x="34" y="156" fill="#48A6E8">read</text>
+        <text x="84" y="156" fill="#22445C">: handler,</text>
+
+        <text x="34" y="188" fill="#48A6E8">update</text>
+        <text x="106" y="188" fill="#22445C">: handler,</text>
+
+        <text x="34" y="220" fill="#48A6E8">delete</text>
+        <text x="106" y="220" fill="#22445C">: handler,</text>
+
+        <text x="34" y="252" fill="#48A6E8">routes</text>
+        <text x="106" y="252" fill="#22445C">: customRoutes,</text>
+
+        <text x="34" y="284" fill="#48A6E8">logger</text>
+        <text x="106" y="284" fill="#22445C">: true,</text>
+      </g>
+
+      <rect x="34" y="296" width="110" height="6" rx="3" fill="url(#accent)" opacity="0.9"/>
+    </g>
+  </g>
+</svg>

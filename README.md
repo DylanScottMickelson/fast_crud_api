@@ -1,4 +1,6 @@
-# 🚀 Fast CRUD API
+<p align="center">
+  <img src="fast_crud_api-banner-minimal.svg" alt="Fast CRUD API banner" />
+</p>
 
 `fast_crud_api` is a lightweight, customizable, and easy-to-use Dart package to create simple CRUD (Create, Read, Update, Delete) APIs. It uses the `shelf` package for building web servers and supports both default CRUD endpoints and custom routes.
 
