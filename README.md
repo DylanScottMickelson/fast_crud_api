@@ -146,6 +146,10 @@ void main() async {
 
 ```
 
+<p align="center">
+  <img src="FastCRUDAPIDocsUI.png" alt="Fast CRUD API Docs UI" />
+</p>
+
 ### 👨‍💻 Access Docs UI: <a name="access"></a>
 
 Production:
