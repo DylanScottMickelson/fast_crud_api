@@ -17,17 +17,14 @@ A lightweight, customizable, easy-to-use package to create simple CRUD (Create, 
 1. [Getting Started](#getting-started)
 2. [Installation](#installation)
 3. [Usage](#usage)
-   * Creating a new API server
-   * Customizing your API
-   * Access your API
-4. [Examples](#examples)
-5. [Contributing](#contributing)
-6. [License](#license)
-7. [Contact](#contact)
+   * [Creating a new API server](#create)
+   * [Customizing your API](#custom)
+   * [Access your API](#access)
+4. [License](#license)
 
 ## 🟢 Getting Started <a name="getting-started"></a>
 
-To get started with `fast_crud_api`, make sure you have either the Flutter SDK or the Dart SDK installed on your system. You can find the installation instructions for both in their respective official documentation:
+To get started with `fast_crud_api`, make sure you have either the Flutter SDK or the Dart SDK installed. You can find the installation instructions for both in their respective official documentation:
 
 * [Flutter](https://docs.flutter.dev/install)
 * [Dart](https://dart.dev/get-dart)
@@ -48,17 +45,17 @@ Now, run `flutter pub get` or `dart pub get` in your terminal/command prompt to 
 
 ## ⚙️ Usage <a name="usage"></a>
 
-### 🖥️ Creating a new API server
+### 🖥️ Creating a new API server <a name="create"></a>
 
 To create a new instance of the `APIServer` class, you'll need to provide it with the following parameters:
 
 * `create`, `read`, `update`, and `delete` functions for handling CRUD requests (optional) `Future<Response> handler(Request request)`
-* Port number for the server (optional) `int port`
-* Version number for your API (optional) `int version`
-* Name your API  `String apiName`
+* Port number for the server (optional) (default 6969) `int port`
+* Version number for your API (optional) (default 1)  `int version`
+* Name your API (optional)  `String apiName`
 * A list of custom routes (optional) `List<CustomRoute> endpoints`
-* Whether to enable logging or not (optional) `bool logger`
-* Whether or not using CRUD. `bool noCRUD`
+* Whether to enable logging or not (optional) (default false) `bool logger`
+* Not using CRUD. (defaults to false) `bool noCRUD`
 
 Here's an example:
 
@@ -101,7 +98,7 @@ void main() async {
 }
 ```
 
-### ✏️ Customizing your API
+### ✏️ Customizing your API <a name="custom"></a>
 
 To customize your API, you can define custom routes and their corresponding handlers as `CustomRoute` objects. These custom routes will be added to the main server in addition to the default CRUD endpoints if enabled.
 
@@ -141,7 +138,7 @@ void main() async {
 }
 ```
 
-### 👨‍💻 Access Docs UI:
+### 👨‍💻 Access Docs UI: <a name="access"></a>
 
 Production:
 Go to http://ip_address:chosen_port/api/docs/
@@ -171,18 +168,6 @@ Production:
 Test:
 - http://127.0.0.1:6969/v1/your/custom/route
 
-## 📑 Examples <a name="examples"></a>
-
-You can find examples of using `fast_crud_api` in the `example` folder within this repository. These examples demonstrate creating a simple CRUD API, as well as adding custom routes.
-
-## 🤗 Contributing <a name="contributing"></a>
-
-Contributions are welcome! If you'd like to contribute, please take a look at our [CONTRIBUTING.md](./CONTRIBUTING.md) file for guidelines and instructions on reporting bugs or submitting pull requests.
-
 ## 🪪 License <a name="license"></a>
 
 `fast_crud_api` is licensed under the MIT license. See the [LICENSE](./LICENSE) file for more information.
-
-## 📧 Contact <a name="contact"></a>
-
-If you have any questions, feel free to contact the creator at dylan.mickelson@free-os.org or open an issue on GitHub.
