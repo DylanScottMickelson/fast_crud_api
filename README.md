@@ -118,6 +118,8 @@ To customize your API, you can define custom routes and their corresponding hand
 Here's an example:
 
 ```dart
+import 'dart:convert';
+
 import 'package:fast_crud_api/custom_route.dart';
 import 'package:fast_crud_api/fast_crud_api.dart';
 import 'package:shelf/shelf.dart';
@@ -127,7 +129,7 @@ void main() async {
   final customRoute1 = CustomRoute(
     endpoint: "users",
     method: "GET",
-    handler: (request) => Response.ok({"users": []}),
+    handler: (request) => Response.ok(jsonEncode({"users": []})),
   );
 
   final apiServer = APIServer(
@@ -141,6 +143,7 @@ void main() async {
 
   await apiServer.start();
 }
+
 ```
 
 ### 👨‍💻 Access Docs UI: <a name="access"></a>
