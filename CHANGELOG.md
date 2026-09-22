@@ -1,3 +1,6 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+Initial release. 
+
+- `APIServer` implementation. 
+- `API Docs` website at /api/docs/
