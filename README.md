@@ -22,7 +22,7 @@ A lightweight, customizable, easy-to-use package to create simple CRUD (Create, 
 * Default simple 4-endpoint CRUD API server
 * Customizable with custom endpoints or a combination of both
 * Supports HTTP methods: GET, POST, PUT, and DELETE
-* CORS middleware enabled (Default * Allow All) (Must be changed for Production!) 
+* CORS middleware enabled (Default "*" Allow All) (Must be changed for Production!) 
 * Logging for debugging purposes (default off)
 
 ## 📖 Table of Contents
