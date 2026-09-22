@@ -22,6 +22,7 @@ import 'package:path/path.dart' as p;
 /// 8/03/2026 DSM
 /// 8/10/2026 DSM
 /// 8/31/2026 DSM
+/// 9/22/2026 DSM
 
 class APIServer {
   final String? apiName;
@@ -69,22 +70,17 @@ class APIServer {
     final corsHeaders = {
       'Access-Control-Allow-Origin':
           '*', // Change to your specific domain for production
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
       'Access-Control-Allow-Headers':
           'Origin, Content-Type, Authorization, X-Requested-With',
     };
 
     return (Handler innerHandler) {
       return (Request request) async {
-        // 1. Handle browser preflight OPTIONS requests immediately
-        if (request.method == 'OPTIONS') {
-          return Response.ok('', headers: corsHeaders);
-        }
-
-        // 2. Process all other requests through your normal router
+        // Process all other requests through your normal router
         final response = await innerHandler(request);
 
-        // 3. Append CORS headers to the final response
+        // Append CORS headers to the final response
         return response.change(headers: {...response.headers, ...corsHeaders});
       };
     };
@@ -92,14 +88,19 @@ class APIServer {
 
   ///Get Web App Path : Helper Function
   String getFlutterWebPath(String packageName) {
-    final projectRoot = Directory.current.path; 
-  
-    final packageConfig = File(p.join(projectRoot, '.dart_tool', 'package_config.json'));
+    final projectRoot = Directory.current.path;
+
+    final packageConfig = File(
+      p.join(projectRoot, '.dart_tool', 'package_config.json'),
+    );
     if (!packageConfig.existsSync()) {
-      throw StateError('No package_config.json at $projectRoot — check Directory.current');
+      throw StateError(
+        'No package_config.json at $projectRoot — check Directory.current',
+      );
     }
 
-    final json = jsonDecode(packageConfig.readAsStringSync()) as Map<String, dynamic>;
+    final json =
+        jsonDecode(packageConfig.readAsStringSync()) as Map<String, dynamic>;
     final packages = json['packages'] as List<dynamic>;
 
     for (final pkg in packages) {
@@ -125,7 +126,7 @@ class APIServer {
     final flutterWebHandler = createStaticHandler(
       getFlutterWebPath("fast_crud_api"),
       defaultDocument: 'index.html',
-      serveFilesOutsidePath: true
+      serveFilesOutsidePath: true,
     );
 
     final InternetAddress address = InternetAddress.anyIPv4;
@@ -141,11 +142,13 @@ class APIServer {
       ], growable: true);
     }
 
+    /// Add Main API Endpoints
+    /// (/, /api/docs/, /api/version, /api/name, /api/endpoints)
     app.get("/", (Request request) async {
       return Response.ok("Welcome to Fast CRUD API!");
     });
 
-    app.mount('/api/docs/',  flutterWebHandler);
+    app.mount('/api/docs/', flutterWebHandler);
 
     app.get('/api/version', (Request request) async {
       return Response.ok(jsonEncode({"version": version ?? 1}));
@@ -159,34 +162,34 @@ class APIServer {
       return Response.ok(jsonEncode({"points": endpoints}));
     });
 
-    ///Add DEFUALT CRUD Endpoints
+    /// Add DEFUALT CRUD Endpoints
     if ((noCRUD ?? false) == false &&
         create != null &&
         read != null &&
         update != null &&
         delete != null) {
-      ///Create Handler
+      /// Create Handler
       app.post('/v${version ?? 1}/create', (Request request) async {
         return await create!(request);
       });
 
-      ///Read Handler
+      /// Read Handler
       app.get('/v${version ?? 1}/read', (Request request) async {
         return await read!(request);
       });
 
-      ///Update Handler
+      /// Update Handler
       app.put('/v${version ?? 1}/update', (Request request) async {
         return await update!(request);
       });
 
-      ///Delete Handler
+      /// Delete Handler
       app.delete('/v${version ?? 1}/delete', (Request request) async {
         return await delete!(request);
       });
     }
 
-    ///Add Custom Routes
+    /// Add Custom Routes if Implemented
     if (routes?.isNotEmpty ?? false) {
       for (CustomRoute route in routes!) {
         final String endpoint = "/v${version ?? 1}/${route.endpoint}";
@@ -226,19 +229,27 @@ class APIServer {
       }
     }
 
-    ///Create API Pipeline Handler
+    ///Create API Server Pipeline Handler
     final handler = const Pipeline()
         .addMiddleware(customLogger())
         .addMiddleware(createCorsMiddleware())
         .addHandler(app.call);
 
-    ///Create & Start HTTP Server
-    final HttpServer server = await serve(handler, address, port ?? 6969);
+    try {
+      ///Create & Start HTTP Server
+      final HttpServer server = await serve(handler, address, port ?? 6969);
 
-    ///Log Server Start Success
-    Logger.log(
-      '✅ ${apiName == null ? "Fast CRUD API" : apiName} Server started on port ${server.port}\n🌐 Access Production API docs at http://${address.address}:${server.port}/api/docs/\n🧑‍💻 Dev API docs at http://localhost:${server.port}/api/docs/',
-      code: "200",
-    );
+      ///Log Server Start Success
+      Logger.log(
+        '✅ ${apiName ?? "Fast CRUD API"} Server started on port ${server.port}\n🌐 Access Production API docs at http://${address.address}:${server.port}/api/docs/\n🧑‍💻 Dev API docs at http://localhost:${server.port}/api/docs/',
+        code: "200",
+      );
+    } catch (e) {
+      ///Log Server Start Failure
+      Logger.log(
+        "Error starting API server... \n\nError: ${e.toString()}",
+        code: "500",
+      );
+    }
   }
 }

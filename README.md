@@ -2,15 +2,28 @@
   <img src="fast_crud_api-banner-minimal.svg" alt="Fast CRUD API banner" />
 </p>
 
-A lightweight, customizable, easy-to-use package to create simple CRUD (Create, Read, Update, Delete) APIs. It uses the `shelf` package for building web servers and supports both default CRUD endpoints and custom routes.
+A lightweight, customizable, easy-to-use package to create simple CRUD (Create, Read, Update, Delete) APIs. It uses the `shelf` package for building web servers and supports CRUD and custom routes.
+
+<p align="center">
+</a>
+  <a href="https://github.com/DylanScottMickelson/fast_crud_api">
+    <img src="https://img.shields.io/badge/Flutter-Package-02569B?logo=flutter&logoColor=white" alt="Flutter package">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license">
+  </a>
+  <a href="https://github.com/sponsors/DylanScottMickelson">
+    <img src="https://img.shields.io/badge/Sponsor-Project-EA4AAA?logo=githubsponsors&logoColor=white" alt="Sponsor this project">
+  </a>
+</p>
 
 ## 📃 Features
 
 * Default simple 4-endpoint CRUD API server
 * Customizable with custom endpoints or a combination of both
 * Supports HTTP methods: GET, POST, PUT, and DELETE
-* CORS (Cross-Origin Resource Sharing) middleware enabled by default (Must be changed for Production!)
-* Logging for debugging purposes
+* CORS middleware enabled (Default * Allow All) (Must be changed for Production!) 
+* Logging for debugging purposes (default off)
 
 ## 📖 Table of Contents
 
