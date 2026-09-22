@@ -73,25 +73,24 @@ To create a new instance of the `APIServer` class, you'll need to provide it wit
 Here's an example:
 
 ```dart
-import 'package:fast_crud_api/logger.dart';
+import 'package:fast_crud_api/fast_crud_api.dart';
 import 'package:shelf/shelf.dart';
 
 void main() async {
-
   /// Define your create, read, update, and delete functions here...
-  Future<Response> createFunction(Request request) {
+  Future<Response> createFunction(Request request) async {
     return Response.ok("Created!");
   }
 
-  Future<Response> readFunction(Request request) {
+  Future<Response> readFunction(Request request) async {
     return Response.ok("Read!");
   }
 
-  Future<Response> updateFunction(Request request) {
+  Future<Response> updateFunction(Request request) async {
     return Response.ok("Updated!");
   }
 
-  Future<Response> deleteFunction(Request request) {
+  Future<Response> deleteFunction(Request request) async {
     return Response.ok("Deleted!");
   }
 
@@ -109,6 +108,7 @@ void main() async {
 
   await apiServer.start();
 }
+
 ```
 
 ### ✏️ Customizing your API <a name="custom"></a>
@@ -118,8 +118,7 @@ To customize your API, you can define custom routes and their corresponding hand
 Here's an example:
 
 ```dart
-import 'package:fast_crud_api/custom_route.dart';
-import 'package:fast_crud_api/logger.dart';
+import 'package:fast_crud_api/fast_crud_api.dart';
 import 'package:shelf/shelf.dart';
 
 void main() async {
