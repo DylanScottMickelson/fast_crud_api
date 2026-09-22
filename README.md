@@ -118,23 +118,16 @@ To customize your API, you can define custom routes and their corresponding hand
 Here's an example:
 
 ```dart
+import 'package:fast_crud_api/custom_route.dart';
 import 'package:fast_crud_api/fast_crud_api.dart';
 import 'package:shelf/shelf.dart';
 
 void main() async {
-  final handler = Response.notFound;
-
   /// Define your custom endpoints here...
   final customRoute1 = CustomRoute(
     endpoint: "users",
     method: "GET",
-    handler: (request) => getUsersFunction(request),
-  );
-
-  final customRoute2 = CustomRoute(
-    endpoint: "items/{itemId}",
-    method: "GET",
-    handler: (request) => getItemFunction(request),
+    handler: (request) => Response.ok({"users": []}),
   );
 
   final apiServer = APIServer(
@@ -143,7 +136,7 @@ void main() async {
     apiName: "My API",
     noCRUD: true,
     logger: true,
-    routes: [customRoute1, customRoute2],
+    routes: [customRoute1],
   );
 
   await apiServer.start();
