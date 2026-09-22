@@ -107,7 +107,7 @@ void main() async {
     logger: true,
   );
 
-  await apiServer.startServer();
+  await apiServer.start();
 }
 ```
 
@@ -147,7 +147,7 @@ void main() async {
     routes: [customRoute1, customRoute2],
   );
 
-  await apiServer.startServer();
+  await apiServer.start();
 }
 ```
 
